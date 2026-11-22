@@ -39,7 +39,13 @@ const HeroSection = ({
 
                     <div className="mt-9 flex flex-wrap gap-4">
                         <button
-                            onClick={handleLogin}
+                            onClick={() => {
+                                if (email) {
+                                    window.location.href = '/dashboard'
+                                } else {
+                                    handleLogin()
+                                }
+                            }}
                             className="rounded-xl bg-violet-600 px-7 py-3.5 text-white font-semibold shadow-lg shadow-violet-200 hover:bg-violet-700 transition"
                         >
                             {email ? 'Go to Dashboard' : 'Get Started'}

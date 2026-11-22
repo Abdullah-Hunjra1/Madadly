@@ -13,6 +13,7 @@ const Navbar = ({
     email: string
     handleLogin: () => void
     handleLogout: () => void
+    
 }) => {
     const [open, setOpen] = useState(false)
     const popupRef = useRef<HTMLDivElement>(null)

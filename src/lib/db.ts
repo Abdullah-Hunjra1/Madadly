@@ -11,7 +11,7 @@ if (!cache) {
     cache = global.mongoose = { conn: null, promise: null }
 }
 
-const connectDB = async () => {
+const connectDb = async () => {
     if (cache.conn) {
         return cache.conn
     }
@@ -27,4 +27,4 @@ const connectDB = async () => {
     return cache.conn
 }
 
-export default connectDB
+export default connectDb

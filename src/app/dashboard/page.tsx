@@ -1,10 +1,12 @@
-import React from 'react'
+import DashboardPage from '@/src/components/DashboardPage';
+import { getSession } from '@/src/lib/getSession';
 
-const page = () => {
+async function page() {
+  const session = await getSession();
   return (
-    <div>
-        Dashboard
-    </div>
+    <>
+        <DashboardPage ownerId={session?.user?.id!} />
+    </>
   )
 }
 

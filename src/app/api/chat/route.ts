@@ -84,9 +84,31 @@ Your goal is to provide reliable, helpful, and accurate customer support while r
             model: "gemini-2.5-flash",
             input: SYSTEM_PROMPT,
         });
-        console.log(interaction.output_text);
 
+        const response = NextResponse.json(interaction.text)
+        response.headers.set('Access-Control-Allow-Origin', '*')
+        response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        response.headers.set('Access-Control-Allow-Headers', 'Content-Type')
+
+        return response
     } catch (error) {
-        return NextResponse.json({ error: "Failed to process request" }, { status: 500 });
+        const response = NextResponse.json({ error: "Failed to process request" }, { status: 500 });
+
+        response.headers.set('Access-Control-Allow-Origin', '*')
+        response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        response.headers.set('Access-Control-Allow-Headers', 'Content-Type')
+
+        return response
     }
+}
+
+export const OPTIONS = async () => {
+    return NextResponse.json(null, {
+        status: 201,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type',
+        }
+    })
 }

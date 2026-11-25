@@ -5,10 +5,12 @@ import { motion } from 'motion/react'
 
 const HeroSection = ({
     email,
-    handleLogin
+    handleLogin,
+    handleLogout
 }: {
     email: string
     handleLogin: () => void
+    handleLogout: () => void
 }) => {
     return (
         <section className="relative pt-40 pb-28 px-6 overflow-hidden">

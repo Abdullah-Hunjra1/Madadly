@@ -1,19 +1,48 @@
+// import { cookies } from "next/headers";
+// import { scalekit } from "./scalekit";
+
+// export async function getSession() {
+//     const session = await cookies()
+//     const token = session.get('access_token')?.value;
+//     if (!token) {
+//         return null;
+//     }
+
+//     try {
+//         const result: { sub: string } = await scalekit.validateToken(token);
+//         const user = await scalekit.user.getUser(result.sub)
+//         return user;
+//     } catch (error) {
+//         console.error("Error validating token:", error);
+//     }
+
+// }
+
+
+
+
+
+
 import { cookies } from "next/headers";
 import { scalekit } from "./scalekit";
 
 export async function getSession() {
-    const session = await cookies()
+    const session = await cookies();
     const token = session.get('access_token')?.value;
+
     if (!token) {
         return null;
     }
 
     try {
         const result: { sub: string } = await scalekit.validateToken(token);
-        const user = await scalekit.user.getUser(result.sub)
+
+        const user = await scalekit.user.getUser(result.sub);
+
         return user;
+
     } catch (error) {
         console.error("Error validating token:", error);
+        return null;
     }
-
 }

@@ -13,9 +13,10 @@ const Navbar = ({
     email: string
     handleLogin: () => void
     handleLogout: () => void
-    
 }) => {
     const [open, setOpen] = useState(false)
+    const [loginLoading, setLoginLoading] = useState(false)
+
     const popupRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -29,6 +30,11 @@ const Navbar = ({
         return () => document.removeEventListener('mousedown', handler)
     }, [])
 
+    const handleLoginClick = () => {
+        setLoginLoading(true)
+        handleLogin()
+    }
+
     return (
         <motion.nav
             initial={{ y: -30, opacity: 0 }}
@@ -37,10 +43,12 @@ const Navbar = ({
             className="fixed top-0 inset-x-0 z-50 border-b border-zinc-200/70 bg-white/80 backdrop-blur-xl"
         >
             <div className="max-w-7xl mx-auto h-20 px-6 flex items-center justify-between">
+
                 <Link href="/" className="flex items-center gap-2.5">
                     <div className="w-9 h-9 rounded-xl bg-violet-600 flex items-center justify-center text-white font-bold text-lg">
                         M
                     </div>
+
                     <span className="text-xl font-bold tracking-tight">
                         Madadly<span className="text-violet-600">.</span>
                     </span>
@@ -50,6 +58,7 @@ const Navbar = ({
                     <Link href="#features" className="hover:text-violet-600 transition">
                         Features
                     </Link>
+
                     <Link href="#how-it-works" className="hover:text-violet-600 transition">
                         How it works
                     </Link>
@@ -75,10 +84,15 @@ const Navbar = ({
                                     <p className="px-3 py-2 text-xs text-zinc-500 truncate">
                                         {email}
                                     </p>
-                                    <a href="/dashboard" className="block rounded-lg px-3 py-2.5 text-sm hover:bg-zinc-100">
+
+                                    <a
+                                        href="/dashboard"
+                                        className="block rounded-lg px-3 py-2.5 text-sm hover:bg-zinc-100"
+                                    >
                                         Dashboard
                                     </a>
-                                    <button 
+
+                                    <button
                                         onClick={handleLogout}
                                         className="w-full text-left rounded-lg px-3 py-2.5 text-sm text-red-600 hover:bg-red-50"
                                     >
@@ -90,12 +104,18 @@ const Navbar = ({
                     </div>
                 ) : (
                     <button
-                        onClick={handleLogin}
-                        className="rounded-xl bg-zinc-950 px-5 py-2.5 text-sm font-medium text-white hover:bg-violet-700 transition"
+                        onClick={handleLoginClick}
+                        disabled={loginLoading}
+                        className="rounded-xl bg-zinc-950 px-5 py-2.5 text-sm font-medium text-white hover:bg-violet-700 transition disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-2"
                     >
-                        Sign in
+                        {loginLoading && (
+                            <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        )}
+
+                        {loginLoading ? 'Signing in...' : 'Sign in'}
                     </button>
                 )}
+
             </div>
         </motion.nav>
     )

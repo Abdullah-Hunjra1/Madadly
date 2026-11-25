@@ -1,153 +1,3 @@
-// 'use client'
-
-// import axios from "axios";
-// import { motion } from "motion/react"
-// import Link from "next/link"
-// import { useEffect, useState } from "react";
-
-// const DashboardPage = ({ ownerId }: { ownerId: string }) => {
-
-//     const [businessName, setBusinessName] = useState('');
-//     const [supportEmail, setSupportEmail] = useState('');
-//     const [knowledge, setKnowledge] = useState('');
-//     const [loading, setLoading] = useState(false);
-//     const [saved, setSaved] = useState(false);
-
-//     const handleSettings = async () => {
-//         setLoading(true);
-//         try {
-//             const result = await axios.post('/api/settings', {
-//                 ownerId,
-//                 businessName,
-//                 supportEmail,
-//                 knowledge
-//             });
-//             setLoading(false);
-//             setSaved(true);
-//             setTimeout(() => setSaved(false), 3000);
-//         } catch (error) {
-//             console.error('Error saving settings:', error);
-//             setLoading(false);
-//         }
-//     }
-
-//     useEffect(() => {
-//         if (ownerId) {
-//             const handleGetDetails = async () => {
-//                 try {
-//                     const result = await axios.post('/api/settings/get', {
-//                         ownerId,
-//                     });
-//                     setBusinessName(result.data.businessName)
-//                     setSupportEmail(result.data.supportEmail)
-//                     setKnowledge(result.data.knowledge)
-//                 } catch (error) {
-//                     console.error('Error fetching settings:', error);
-//                 }
-//             }
-//             handleGetDetails();
-//         }
-//     }, [ownerId]);
-
-//     return (
-//         <div className=' min-h-screen bg-zinc-50 text-zinc-900 '>
-
-//             <motion.nav
-//                 initial={{ y: -30, opacity: 0 }}
-//                 animate={{ y: 0, opacity: 1 }}
-//                 transition={{ duration: 0.5 }}
-//                 className="fixed top-0 inset-x-0 z-50 border-b border-zinc-200/70 bg-white/80 backdrop-blur-xl"
-//             >
-//                 <div className="max-w-7xl mx-auto h-20 px-6 flex items-center justify-between">
-//                     <Link href="/" className="flex items-center gap-2.5">
-//                         <div className="w-9 h-9 rounded-xl bg-violet-600 flex items-center justify-center text-white font-bold text-lg">
-//                             M
-//                         </div>
-//                         <span className="text-xl font-bold tracking-tight">
-//                             Madadly<span className="text-violet-600">.</span>
-//                         </span>
-//                     </Link>
-
-//                     <button>Embed chatbot</button>
-
-
-
-//                 </div>
-//             </motion.nav >
-
-//             <div>
-//                 <motion.div
-//                     initial={{ y: 30, opacity: 0 }}
-//                     animate={{ y: 0, opacity: 1 }}
-//                     transition={{ duration: 0.5 }}
-//                 >
-//                     <div>
-//                         <h1 className="text-3xl font-bold">Dashboard</h1>
-//                         <p className="text-zinc-600">
-//                             Welcome to your dashboard, {ownerId}!
-//                         </p>
-//                     </div>
-
-//                     <div>
-//                         <h1>Business Details</h1>
-//                         <div>
-//                             <input type="text" placeholder="Business Name" value={businessName} onChange={(e) => setBusinessName(e.target.value)} />
-//                             <input type="text" placeholder="Support Email" value={supportEmail} onChange={(e) => setSupportEmail(e.target.value)} />
-//                         </div>
-//                     </div>
-
-//                     <div>
-//                         <h1>Knowledge</h1>
-//                         <p>Add FAQs, policies, and other information </p>
-//                         <div>
-//                             <textarea placeholder={` Example: 
-//                                 What is your return policy?
-//                                 Delivery Information
-//                                 Shipping Rates
-//                                 Cash on Delivery available
-//                                  `} value={knowledge} onChange={(e) => setKnowledge(e.target.value)} />
-
-//                         </div>
-//                     </div>
-
-//                     <div>
-//                         <motion.button
-//                             whileHover={{ scale: 1.05 }}
-//                             whileTap={{ scale: 0.95 }}
-//                             className="bg-violet-600 text-white py-2 px-4 rounded-lg font-medium"
-//                             disabled={loading}
-//                             onClick={handleSettings}
-//                         >
-//                             {loading ? "Saving..." : "Save"}
-//                         </motion.button>
-
-//                         {saved && (<motion.span>
-//                             Settings saved successfully!
-//                         </motion.span>
-//                         )}
-
-//                     </div>
-
-//                 </motion.div>
-//             </div>
-//         </div >
-//     )
-// }
-
-// export default DashboardPage
-
-
-
-
-
-
-
-
-
-
-
-
-
 'use client'
 
 import axios from "axios";
@@ -226,11 +76,12 @@ const DashboardPage = ({ ownerId }: { ownerId: string }) => {
                         </span>
                     </Link>
 
-                    <button
+                    <Link
+                        href="/embed"
                         className="px-4 py-2.5 rounded-xl bg-[#272343] text-white text-sm font-medium hover:bg-[#39345D] transition-colors"
                     >
                         Embed chatbot
-                    </button>
+                    </Link>
 
                 </div>
             </motion.nav>

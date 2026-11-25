@@ -1,5 +1,5 @@
 (function () {
-    const api_Url = 'http://localhost:3001/api/chat';
+    const api_Url = 'https://madadly-website.vercel.app/api/chat';
 
     const scriptTag = document.currentScript;
     const ownerId = scriptTag.getAttribute('data-owner-id')

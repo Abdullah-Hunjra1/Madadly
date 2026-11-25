@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
     response.cookies.set('access_token', session.accessToken, {
         httpOnly: true,
         maxAge: 60 * 60 * 24 * 7, // 7 days,
-        secure: false, // Set to true in production
+        secure: true, // Set to true in production
         path: '/',
     });
     return response;

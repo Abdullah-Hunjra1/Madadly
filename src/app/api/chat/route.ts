@@ -80,12 +80,12 @@ Your goal is to provide reliable, helpful, and accurate customer support while r
 
         const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-        const interaction = await ai.interactions.create({
+        const res = await ai.models.generateContent({
             model: "gemini-2.5-flash",
-            input: SYSTEM_PROMPT,
+            contents: SYSTEM_PROMPT,
         });
 
-        const response = NextResponse.json(interaction.text)
+        const response = NextResponse.json(res.text)
         response.headers.set('Access-Control-Allow-Origin', '*')
         response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS')
         response.headers.set('Access-Control-Allow-Headers', 'Content-Type')

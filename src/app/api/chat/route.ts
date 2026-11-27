@@ -76,29 +76,51 @@ INSTRUCTIONS:
 - For unrelated questions, politely redirect the conversation toward the business's products or services.
 
 Your goal is to provide reliable, helpful, and accurate customer support while representing the business professionally.
+
+RESPONSE FORMATTING RULES:
+
+- Always provide clean, readable, and well-structured responses.
+- Use short paragraphs instead of long blocks of text.
+- Use bullet points when listing multiple products, services, or details.
+- Use **bold** for product names, prices, and important information.
+- Use headings when a response contains multiple sections.
+- Keep responses concise, friendly, and professional.
+- Add appropriate spacing between paragraphs and list items.
+- Avoid unnecessary introductions and repetitive information.
+- Never use HTML tags.
+- Use Markdown formatting only when it improves readability.
 `;
 
         const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
         const res = await ai.models.generateContent({
-            model: "gemini-2.5-flash",
-            contents: SYSTEM_PROMPT,
+            model: "gemini-3.5-flash-lite",
+            contents: message,
+            config: {
+                systemInstruction: SYSTEM_PROMPT,
+            },
         });
 
-        const response = NextResponse.json(res.text)
-        response.headers.set('Access-Control-Allow-Origin', '*')
-        response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS')
-        response.headers.set('Access-Control-Allow-Headers', 'Content-Type')
+        const response = NextResponse.json({ reply: res.text });
 
-        return response
+        response.headers.set('Access-Control-Allow-Origin', '*');
+        response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+        response.headers.set('Access-Control-Allow-Headers', 'Content-Type');
+
+        return response;
     } catch (error) {
-        const response = NextResponse.json({ error: "Failed to process request" }, { status: 500 });
+        console.error("CHAT API ERROR:", error);
 
-        response.headers.set('Access-Control-Allow-Origin', '*')
-        response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS')
-        response.headers.set('Access-Control-Allow-Headers', 'Content-Type')
+        const response = NextResponse.json(
+            { error: "Failed to process request" },
+            { status: 500 }
+        );
 
-        return response
+        response.headers.set('Access-Control-Allow-Origin', '*');
+        response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+        response.headers.set('Access-Control-Allow-Headers', 'Content-Type');
+
+        return response;
     }
 }
 

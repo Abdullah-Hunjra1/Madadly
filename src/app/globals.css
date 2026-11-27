@@ -1,1 +1,97 @@
 @import "tailwindcss";
+
+@theme {
+  /* Brand */
+  --color-brand: #0f5c54;
+  --color-brand-hover: #0b4a44;
+  --color-brand-mid: #2e8f83;
+  --color-brand-soft: #e3f1ee;
+
+  /* AI accent: use only to mark AI activity */
+  --color-ai: #d98a1f;
+  --color-ai-soft: #fbf1de;
+  --color-ai-ink: #8a5410;
+
+  /* Warm neutrals */
+  --color-canvas: #f7f5f1;
+  --color-surface: #ffffff;
+  --color-muted: #efece6;
+  --color-line: #e4e0d8;
+  --color-ink: #1b1f1e;
+  --color-ink-2: #5c6360;
+  --color-ink-3: #8a908d;
+
+  /* Semantic */
+  --color-success: #2f8f5b;
+  --color-success-soft: #e4f3ea;
+  --color-warning: #c9821a;
+  --color-warning-soft: #faefd9;
+  --color-danger: #c4443a;
+  --color-danger-soft: #fbe9e7;
+  --color-info: #3b6fa8;
+  --color-info-soft: #e6eef7;
+
+  /* Shape and depth */
+  --radius-card: 0.75rem;
+  --radius-control: 0.625rem;
+  --shadow-card: 0 1px 2px rgb(27 31 30 / 0.04), 0 0 0 0.5px rgb(27 31 30 / 0.02);
+  --shadow-pop: 0 8px 24px -6px rgb(27 31 30 / 0.12), 0 2px 6px rgb(27 31 30 / 0.05);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Type scale */
+  --text-display: 3rem;
+  --text-display--line-height: 1.08;
+  --text-title: 1.625rem;
+  --text-title--line-height: 1.2;
+  --text-section: 1.0625rem;
+  --text-section--line-height: 1.35;
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.55;
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.4;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-jakarta), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html {
+    background: var(--color-canvas);
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.015em;
+  }
+  ::selection {
+    background: var(--color-brand-soft);
+    color: var(--color-brand);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-mid);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
